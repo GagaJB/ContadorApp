@@ -1,6 +1,5 @@
 package com.gabriel.contadorapp
 
-import android.widget.Button
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -67,9 +67,19 @@ fun ContadorScreen() {
                 Text("+ Somar")
             }
 
-            OutlinedButton(onClick = { contador-- }) {
+            OutlinedButton(
+                onClick = { contador-- },
+                enabled = contador > 0
+            ) {
                 Text("— Subtrair")
             }
+        }
+        TextButton(
+            onClick = { contador = 0 },
+            modifier = Modifier.padding(top = 16.dp),
+            enabled = contador != 0
+        ) {
+            Text("Zerar")
         }
     }
 }
