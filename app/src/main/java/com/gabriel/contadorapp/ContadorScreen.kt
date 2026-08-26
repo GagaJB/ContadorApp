@@ -17,10 +17,11 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -38,7 +39,7 @@ fun ContadorScreen() {
             )
         }
     ) { paddingValues ->
-    var contador by remember { mutableIntStateOf(0) }
+    var contador by rememberSaveable { mutableIntStateOf(0) }
 
     Column(
         modifier = Modifier
@@ -54,9 +55,16 @@ fun ContadorScreen() {
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
+        val corDoNumero = if (contador == 0) {
+            MaterialTheme.colorScheme.onSurface
+        } else {
+            MaterialTheme.colorScheme.primary
+        }
+
         Text(
             text = "$contador",
-            style = MaterialTheme.typography.displayLarge,
+            style = MaterialTheme.typography.displayLarge.copy(fontWeight = FontWeight.Bold),
+            color = corDoNumero,
             modifier = Modifier.padding(vertical = 32.dp)
         )
         Row(
